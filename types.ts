@@ -12,3 +12,12 @@ export interface AlbumMutation {
     date: string;
     image: string | null;
 }
+
+export interface ITrack {
+    _id: ObjectId;
+    name: string;
+    album: ObjectId;
+    duration: string;
+}
+
+export type TrackMutation = Omit<ITrack, '_id'>;
