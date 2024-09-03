@@ -14,7 +14,8 @@ const AlbumSchema = new Schema({
         required: true,
         validate: {
             validator: async (value: Types.ObjectId) => {
-                return Artist.findById(value);
+                const artist = await Artist.findById(value);
+                return Boolean(artist);
             },
             message: 'Artist does not exist!',
         }
