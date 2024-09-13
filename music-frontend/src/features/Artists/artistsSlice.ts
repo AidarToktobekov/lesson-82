@@ -47,6 +47,7 @@ export const artistsSlice = createSlice({
     },
     selectors: {
         selectArtists: (state)=>state.items,
+        selectOneArtist: (state)=>state.oneArtist,
         selectLoad: (state)=>state.itemsFetching,
         selectArtist: (state)=>state.oneArtist,
     }
@@ -57,5 +58,6 @@ export const artistsReducer = artistsSlice.reducer;
 export const {
     selectArtists,
     selectLoad,
+    selectOneArtist,
     selectArtist,
   } = artistsSlice.selectors;

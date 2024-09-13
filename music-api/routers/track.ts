@@ -23,6 +23,15 @@ tracksRouter.get('/tracks', async(req, res, next) => {
     }
 })
 
+tracksRouter.get('/tracks/:id', async(req, res, next) => {
+    try{
+        const tracks = await Track.find({album: req.params.id});
+        return res.send(tracks);
+    }catch (error){
+        next(error);
+    }
+})
+
 tracksRouter.post('/tracks',  async (req, res, next) => {
     try {
         const albums = await Track.find({album: req.body.album});
@@ -36,7 +45,6 @@ tracksRouter.post('/tracks',  async (req, res, next) => {
 
         const track = new Track(tracksMutation);
         await track.save();
-        // console.log(albums.length);
         
         return res.send(tracksMutation);
     } catch (error) {
