@@ -15,6 +15,15 @@ artistRouter.get('/artists', async(req, res, next) => {
     }
 })
 
+artistRouter.get('/artists/:id', async(req, res, next) => {
+    try{
+        const artist = await Artist.findById(req.params.id);
+        return res.send(artist);
+    }catch (error){
+        next(error);
+    }
+})
+
 artistRouter.post('/artists', imagesUpload.single('image'),  async (req, res, next) => {
     try {
 

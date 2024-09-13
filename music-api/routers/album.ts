@@ -24,6 +24,15 @@ albumRouter.get('/albums/:id', async(req, res, next) => {
     }
 })
 
+albumRouter.get('/artistAlbums/:idArtist', async(req, res, next) => {
+    try{
+        const albums = await Album.find({artist: req.params.idArtist});
+        return res.send(albums);
+    }catch (error){
+        next(error);
+    }
+})
+
 albumRouter.post('/albums', imagesUpload.single('image'),  async (req, res, next) => {
     try {
         const albumMutation: AlbumMutation = {

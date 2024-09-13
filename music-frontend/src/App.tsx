@@ -2,7 +2,8 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AppToolbar from './UI/AppToolbar/AppToolbar'
 import { Route, Routes } from 'react-router-dom'
-import Artist from './features/Artists/Artists'
+import Artists from './features/Artists/Artists'
+import Albums from './features/Albums/Albums'
 
 const App = ()=> {
 
@@ -15,7 +16,12 @@ const App = ()=> {
         <Routes>
           <Route path='/' element={
             <> 
-              <Artist/>
+              <Artists/>
+            </>
+          }/>
+          <Route path='/artists/:id' element={
+            <> 
+              <Albums/>
             </>
           }/>
           <Route path="*" element={<h1 className='text-center'>Not found</h1>} />

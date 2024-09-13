@@ -4,3 +4,11 @@ export interface IArtist{
     description?: string;
     image: string | null; 
 }
+
+export interface IAlbum{
+    _id: string;
+    name: string;
+    artist: string;
+    date: Date;
+    image: string | null; 
+}

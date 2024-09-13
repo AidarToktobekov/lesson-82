@@ -4,7 +4,7 @@ import { fetchArtists } from "./artistsThunk";
 import { selectArtists, selectLoad } from "./artistsSlice";
 import ArtistItem from "./components/ArtistItem";
 
-const Artist = ()=>{
+const Artists = ()=>{
     
     const dispatch = useAppDispatch();
     const artists = useAppSelector(selectArtists);
@@ -12,13 +12,14 @@ const Artist = ()=>{
 
     let content: React.ReactNode = (
         <h5 className="text-center my-5">
-          There are no products here!
+            Artist list is empty
         </h5>
     );
 
     if (!isFetching) {
         content = artists.map((artist) => (
           <ArtistItem
+            key={artist._id}
             id={artist._id}
             name={artist.name}
             image={artist.image}
@@ -41,4 +42,4 @@ const Artist = ()=>{
     )
 }
 
-export default Artist;
+export default Artists;
