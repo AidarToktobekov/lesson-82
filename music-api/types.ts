@@ -9,7 +9,7 @@ export interface ArtistMutation {
 export interface AlbumMutation {
     name: string;
     artist: ObjectId;
-    date: string;
+    date: Date;
     image: string | null;
 }
 
@@ -18,6 +18,7 @@ export interface ITrack {
     name: string;
     album: ObjectId;
     duration: string;
+    trackNumber: number;
 }
 
 export type TrackMutation = Omit<ITrack, '_id'>;

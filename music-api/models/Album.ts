@@ -21,7 +21,7 @@ const AlbumSchema = new Schema({
         }
     },
     date: {
-        type: String,
+        type: Date,
         required: true,
     },
     image: {

@@ -4,6 +4,7 @@ import { TrackMutation} from "../types";
 import Track from "../models/Track";
 import User from "../models/User";
 import TrackHistory from "../models/TrackHistory";
+import Album from "../models/Album";
 
 const tracksRouter = express.Router();
 
@@ -24,16 +25,20 @@ tracksRouter.get('/tracks', async(req, res, next) => {
 
 tracksRouter.post('/tracks',  async (req, res, next) => {
     try {
+        const albums = await Track.find({album: req.body.album});
+
         const tracksMutation: TrackMutation = {
             name: req.body.name,
             duration: req.body.duration,
             album: req.body.album,
+            trackNumber: albums.length + 1,
         };
 
         const track = new Track(tracksMutation);
         await track.save();
-
-        return res.send(track);
+        // console.log(albums.length);
+        
+        return res.send(tracksMutation);
     } catch (error) {
         if (error instanceof mongoose.Error.ValidationError) {
             return res.status(400).send(error);
