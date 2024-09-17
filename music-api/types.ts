@@ -35,3 +35,10 @@ export interface UserMethods {
 }
 
 export type UserModel = Model<UserFields, {}, UserMethods>;
+
+export interface ITrackHistory {
+    _id: ObjectId;
+    user: ObjectId;
+    track: ObjectId;
+    date: string;
+}

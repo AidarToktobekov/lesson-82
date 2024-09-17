@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useState } from "react";
-import { GlobalError, LoginMutation } from "../../types";
+import { LoginMutation } from "../../types";
 import { login } from "./userThunk";
 import {selectLoginError} from './userSlice'
 
