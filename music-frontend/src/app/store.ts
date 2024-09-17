@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { artistsReducer } from '../features/Artists/artistsSlice';
 import { albumsReducer } from '../features/Albums/albumsSlice';
 import { tracksReducer } from '../features/Tracks/tracksSlice';
+import { userReducer } from '../features/User/userSlice';
 
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     artists: artistsReducer,
     albums: albumsReducer,
     tracks: tracksReducer,
+    users: userReducer,
   },
 });
 
