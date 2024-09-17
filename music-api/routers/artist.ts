@@ -6,7 +6,7 @@ import {imagesUpload} from "../multer";
 
 const artistRouter = express.Router();
 
-artistRouter.get('/artists', async(req, res, next) => {
+artistRouter.get('/', async(req, res, next) => {
     try{
         const artists = await Artist.find();
         return res.send(artists);
@@ -15,7 +15,7 @@ artistRouter.get('/artists', async(req, res, next) => {
     }
 })
 
-artistRouter.get('/artists/:id', async(req, res, next) => {
+artistRouter.get('/:id', async(req, res, next) => {
     try{
         const artist = await Artist.findById(req.params.id);
         return res.send(artist);
@@ -24,7 +24,7 @@ artistRouter.get('/artists/:id', async(req, res, next) => {
     }
 })
 
-artistRouter.post('/artists', imagesUpload.single('image'),  async (req, res, next) => {
+artistRouter.post('/', imagesUpload.single('image'),  async (req, res, next) => {
     try {
 
         const artistMutation: ArtistMutation = {

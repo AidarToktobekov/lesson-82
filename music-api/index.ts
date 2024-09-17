@@ -13,9 +13,9 @@ const port = 8000;
 app.use(express.json());
 app.use(cors(config.corsOptions));
 app.use(express.static('public'));
-app.use('/', artistRouter);
-app.use('/', albumRouter);
-app.use('/', tracksRouter);
+app.use('/artists', artistRouter);
+app.use('/albums', albumRouter);
+app.use('/tracks', tracksRouter);
 app.use('/user', userRouter);
 
 const run = async()=>{

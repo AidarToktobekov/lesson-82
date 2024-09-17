@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RegisterMutation } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { selectRegisterError } from "./userSlice";
 import { register } from "./userThunk";
 
@@ -40,24 +40,23 @@ const Register = ()=>{
 
     return(
         <>  
-        <div className="container">
-            <form onSubmit={submitFormHandler}>
-                <h3 className="text-center my-4">
-                    Sign up
-                </h3>
-                <div className="mb-3">
-                    <label className="form-label">Username</label>
-                    <input type="name" required name="username" onChange={inputChangeHandler} className="form-control"/>
-                    <span className="text-6 text-danger">{getFieldError('username')}</span>
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input type="password" required name="password" onChange={inputChangeHandler} className="form-control"/>
-                    <span className="text-6 text-danger">{getFieldError('username')}</span>
-                </div>
-                <button type="submit" className="btn btn-dark">Submit</button>
-            </form>
-        </div>
+        <form onSubmit={submitFormHandler}>
+            <h3 className="text-center my-4">
+                Sign up
+            </h3>
+            <div className="mb-3">
+                <label className="form-label">Username</label>
+                <input value={state.username} type="name" required name="username" onChange={inputChangeHandler} className="form-control"/>
+                <span className="text-6 text-danger">{getFieldError('username')}</span>
+            </div>
+            <div className="mb-3">
+                <label className="form-label">Password</label>
+                <input value={state.password} type="password" required name="password" onChange={inputChangeHandler} className="form-control"/>
+                <span className="text-6 text-danger">{getFieldError('username')}</span>
+            </div>
+            <button type="submit" className="btn btn-dark d-block mb-3">Sign up</button>
+            <Link to="/login">Already have an account? Sign in</Link>
+        </form>
         </>
     )
 }

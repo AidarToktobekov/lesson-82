@@ -8,7 +8,7 @@ import Album from "../models/Album";
 
 const tracksRouter = express.Router();
 
-tracksRouter.get('/tracks', async(req, res, next) => {
+tracksRouter.get('/', async(req, res, next) => {
     try{
         const trackId = req.query.track_id as string;
         if (trackId){
@@ -23,7 +23,7 @@ tracksRouter.get('/tracks', async(req, res, next) => {
     }
 })
 
-tracksRouter.get('/tracks/:id', async(req, res, next) => {
+tracksRouter.get('/:id', async(req, res, next) => {
     try{
         const tracks = await Track.find({album: req.params.id});
         return res.send(tracks);
@@ -32,7 +32,7 @@ tracksRouter.get('/tracks/:id', async(req, res, next) => {
     }
 })
 
-tracksRouter.post('/tracks',  async (req, res, next) => {
+tracksRouter.post('/',  async (req, res, next) => {
     try {
         const albums = await Track.find({album: req.body.album});
 

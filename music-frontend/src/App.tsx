@@ -6,6 +6,7 @@ import Artists from './features/Artists/Artists'
 import Albums from './features/Albums/Albums'
 import Tracks from './features/Tracks/Tracks'
 import Register from './features/User/Register'
+import Login from './features/User/Login'
 
 const App = ()=> {
 
@@ -33,6 +34,9 @@ const App = ()=> {
           }/>
           <Route path='/register' element={
             <Register/>
+          }/>
+          <Route path='/login' element={
+            <Login/>
           }/>
           <Route path="*" element={<h1 className='text-center'>Not found</h1>} />
         </Routes>

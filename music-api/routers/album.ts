@@ -6,7 +6,7 @@ import Album from "../models/Album";
 
 const albumRouter = express.Router();
 
-albumRouter.get('/albums', async(req, res, next) => {
+albumRouter.get('/', async(req, res, next) => {
     try{
         const albums = await Album.find();
         return res.send(albums);
@@ -15,7 +15,7 @@ albumRouter.get('/albums', async(req, res, next) => {
     }
 })
 
-albumRouter.get('/albums/:id', async(req, res, next) => {
+albumRouter.get('/:id', async(req, res, next) => {
     try{
         const albums = await Album.findById(req.params.id);
         return res.send(albums);
@@ -24,7 +24,7 @@ albumRouter.get('/albums/:id', async(req, res, next) => {
     }
 })
 
-albumRouter.get('/artistAlbums/:idArtist', async(req, res, next) => {
+albumRouter.get('/artist/:idArtist', async(req, res, next) => {
     try{
         const albums = await Album.find({artist: req.params.idArtist});
         return res.send(albums);
@@ -33,7 +33,7 @@ albumRouter.get('/artistAlbums/:idArtist', async(req, res, next) => {
     }
 })
 
-albumRouter.post('/albums', imagesUpload.single('image'),  async (req, res, next) => {
+albumRouter.post('/', imagesUpload.single('image'),  async (req, res, next) => {
     try {
         const albumMutation: AlbumMutation = {
             name: req.body.name,

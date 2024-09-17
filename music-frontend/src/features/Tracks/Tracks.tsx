@@ -8,6 +8,7 @@ import { fetchArtist } from "../Artists/artistsThunk";
 import { selectOneArtist } from "../Artists/artistsSlice";
 import { fetchAlbum } from "../Albums/albumsThunk";
 import TrackItem from "./components/TrackItem";
+import { selectUser } from "../User/userSlice";
 
 const Tracks = ()=>{
 
@@ -17,8 +18,8 @@ const Tracks = ()=>{
     const isFetching = useAppSelector(selectLoad);
     const albums = useAppSelector(selectOneAlbum);
     const artistId = albums?.artist;
-    const artist = useAppSelector(selectOneArtist)
-
+    const artist = useAppSelector(selectOneArtist);
+    const user = useAppSelector(selectUser);
 
     useEffect(()=>{
         dispatch(fetchTracks(id));
@@ -36,7 +37,7 @@ const Tracks = ()=>{
 
     if (!isFetching) {
         content = tracks.map((track) => (
-            <TrackItem key={track._id} duration={track.duration} trackNumber={track.trackNumber} name={track.name} id={track._id} />
+            <TrackItem buttonState={Boolean(!user)} key={track._id} duration={track.duration} trackNumber={track.trackNumber} name={track.name} id={track._id} />
         ));
     }
 
@@ -48,6 +49,13 @@ const Tracks = ()=>{
             <h3 className="text-center my-4">
                 {albums?.name}
             </h3>
+            {user? (
+               null 
+            ) : (
+                <h5 className="text-center text-bg-danger rounded-1 py-1 my-4">
+                    Зарегистрируйтесь чтобы послушать песни!
+                </h5>
+            )}
             <div className="list-group">
                 {content}
             </div>

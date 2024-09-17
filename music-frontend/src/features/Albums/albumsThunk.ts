@@ -3,7 +3,7 @@ import axiosApi from '../../axiosApi';
 import { IAlbum } from '../../types';
 
 export const fetchAlbums = createAsyncThunk<IAlbum[], string>('albums/fetchAll', async (idArtist) => {
-  const { data: albums } = await axiosApi.get<IAlbum[]>(`/artistAlbums/${idArtist}`);
+  const { data: albums } = await axiosApi.get<IAlbum[]>(`/albums/artist/${idArtist}`);
   return albums;
 });
 
