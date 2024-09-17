@@ -17,7 +17,7 @@ const AppToolbar = ()=>{
         links = (
             <>
                 <NavLink className="navbar-brand text-light ms-auto" to='/track-history'>Track-History</NavLink>
-                <NavLink className="navbar-brand text-light" to='/user'>{user.username}</NavLink>
+                <button className="navbar-brand text-light btn">{user.username}</button>
             </>
         )
     }

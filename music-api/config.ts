@@ -19,11 +19,6 @@ const config = {
     rootPath,
     publicPath: path.join(rootPath, 'public'),
     corsOptions,
-    database: {
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'shop',
-    }
+    database: 'mongodb://localhost/homeWorks',
 };
 export default config;
