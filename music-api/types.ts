@@ -11,6 +11,8 @@ export interface AlbumMutation {
     artist: ObjectId;
     date: Date;
     image: string | null;
+    user: ObjectId | undefined;
+    isPublished: boolean;
 }
 
 export interface ITrack {
@@ -27,6 +29,7 @@ export interface UserFields {
     username: string;
     password: string;
     token: string;
+    role: string;
 }
 
 export interface UserMethods {

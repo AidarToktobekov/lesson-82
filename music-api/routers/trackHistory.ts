@@ -2,13 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import TrackHistory from "../models/TrackHistory";
 import User from "../models/User";
+import auth, { RequestWithUser } from "../middleware/auth";
 
 const tracksHistoryRouter = express.Router();
 
 
-tracksHistoryRouter.get('/:token', async(req, res, next)=>{
+tracksHistoryRouter.get('/', auth, async(req, res, next)=>{
     try{
-        const user = await User.findOne({token: req.params.token});
+        const user = (req as RequestWithUser).user;  
         
         if (user) {
             const tracks = await TrackHistory.find({user: user._id});

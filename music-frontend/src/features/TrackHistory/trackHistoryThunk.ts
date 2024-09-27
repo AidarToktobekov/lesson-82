@@ -4,13 +4,12 @@ import { RootState } from "../../app/store";
 import { isAxiosError } from "axios";
 import axiosApi from "../../axiosApi";
 
-export const getTrackHistory = createAsyncThunk<ITrackHistory[], string | undefined>(
+export const getTrackHistory = createAsyncThunk<ITrackHistory[], void, {state: RootState}>(
     'trackHistory/fetch',
-    async(token)=>{
-        if (token) {                
-            const {data: tracks} = await axiosApi.get(`/track_history/${token}`)
-            return tracks;
-        }
+    async(_arg, {getState})=>{
+        const token = getState().users.user?.token;
+        const {data: tracks} = await axiosApi.get(`/track_history`, {headers: {Authorization: `Bearer ${token}`}})
+        return tracks;
     },
 );
 

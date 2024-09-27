@@ -1,5 +1,6 @@
 import mongoose, {Types} from "mongoose";
 import Album from "./Album";
+import User from "./User";
 
 const Schema = mongoose.Schema;
 
@@ -27,6 +28,10 @@ const TrackSchema = new Schema({
             },
             message: 'Album does not exist!',
         }
+    },
+    isPublished: {
+        type: Boolean,
+        required: true,
     }
 });
 

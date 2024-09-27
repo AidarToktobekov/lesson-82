@@ -1,8 +1,27 @@
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { selectUser } from "../../features/User/userSlice";
+import { useState } from 'react';
+import { Menu, MenuItem } from '@mui/material';
+import { useAppDispatch } from '../../app/hooks';
+import { logout } from '../../features/User/userThunk';
 
 const AppToolbar = ()=>{
+
+    const dispatch = useAppDispatch();
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const isOpen = Boolean(anchorEl);
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+      };
+  
+    const handleLogout = () => {
+      dispatch(logout());
+    };
 
     const user = useAppSelector(selectUser);
 
@@ -17,7 +36,10 @@ const AppToolbar = ()=>{
         links = (
             <>
                 <NavLink className="navbar-brand text-light ms-auto" to='/track-history'>Track-History</NavLink>
-                <button className="navbar-brand text-light btn">{user.username}</button>
+                <button className="navbar-brand text-light btn" onClick={handleClick}>{user.username}</button>
+                <Menu open={isOpen} anchorEl={anchorEl} onClose={handleClose} keepMounted>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
             </>
         )
     }

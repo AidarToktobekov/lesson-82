@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import { TrackMutation} from "../types";
 import Track from "../models/Track";
+import auth, { RequestWithUser } from "../middleware/auth";
+import permit from "../middleware/permit";
 
 const tracksRouter = express.Router();
 
@@ -38,15 +40,20 @@ tracksRouter.get('/:id', async(req, res, next) => {
     }
 })
 
-tracksRouter.post('/',  async (req, res, next) => {
+tracksRouter.post('/', auth, async (req, res, next) => {
     try {
+        const user = (req as RequestWithUser).user;
+        if (!user) {
+            res.status(403).send({error: 'Unauthorized'});
+        }
         const albums = await Track.find({album: req.body.album});
 
-        const tracksMutation: TrackMutation = {
+        const tracksMutation = {
             name: req.body.name,
             duration: req.body.duration,
             album: req.body.album,
             trackNumber: albums.length + 1,
+            user: user?._id,
         };
 
         const track = new Track(tracksMutation);
@@ -62,6 +69,13 @@ tracksRouter.post('/',  async (req, res, next) => {
     }
 });
 
-
+tracksRouter.delete('/:id', auth, permit('admin'), async(req, res, next)=>{
+    try{
+        const track = await Track.findByIdAndDelete(req.params.id);
+        return res.send(track);
+    }catch(e){
+        next(e);
+    }
+});
 
 export default tracksRouter;

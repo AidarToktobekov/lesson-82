@@ -1,5 +1,6 @@
 import mongoose, {Types} from "mongoose";
 import Artist from "./Artist";
+import User from "./User";
 
 const Schema = mongoose.Schema;
 
@@ -26,6 +27,11 @@ const AlbumSchema = new Schema({
     },
     image: {
         type: String,
+    },
+    isPublished: {
+        type: Boolean,
+        required: true,
+        default: false,
     }
 });
 

@@ -18,6 +18,18 @@ const run = async () => {
     console.log('Skipping drop...');
   }
 
+  await User.create({
+    username: "user",
+    password: "123",
+    token: crypto.randomUUID(),
+    role: "user"
+  }, {
+    username: "admi",
+    password: "321",
+    token: crypto.randomUUID(),
+    role: "admin"
+  });
+
   const [scrip, eminem] = await Artist.create({
         name: 'Scriptonit',
     }, {

@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
+import User from "./User";
 
 const Schema = mongoose.Schema;
 
@@ -12,7 +13,11 @@ const ArtistSchema = new Schema({
     },
     image: {
         type: String,
-    }
+    },
+    isPublished: {
+        type: Boolean,
+        required: true,
+    },
 });
 
 const Artist = mongoose.model("Artist", ArtistSchema);
