@@ -1,10 +1,10 @@
 import express from "express";
 import Artist from "../models/Artist";
 import mongoose from "mongoose";
-import {ArtistMutation} from "../types";
 import {imagesUpload} from "../multer";
 import auth, { RequestWithUser } from "../middleware/auth";
 import permit from "../middleware/permit";
+import { log } from "node:console";
 
 const artistRouter = express.Router();
 
@@ -29,19 +29,21 @@ artistRouter.get('/:id', async(req, res, next) => {
 artistRouter.post('/', auth, imagesUpload.single('image'),  async (req, res, next) => {
     try {
         const user = (req as RequestWithUser).user;
+        
         if (!user) {
             res.status(403).send({error: 'Unauthorized'});
         }
-
+        
         const artistMutation = {
             name: req.body.name,
             description: req.body.description ? req.body.description : null,
             image: req.file ? req.file.filename : null,
+            isPublished: false,
         };
-
+        
         const artist = new Artist(artistMutation);
+        
         await artist.save();
-
         return res.send(artist);
     } catch (error) {
         if (error instanceof mongoose.Error.ValidationError) {

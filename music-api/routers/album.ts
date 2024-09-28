@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import {AlbumMutation} from "../types";
 import {imagesUpload} from "../multer";
 import Album from "../models/Album";
 import auth, { RequestWithUser } from "../middleware/auth";

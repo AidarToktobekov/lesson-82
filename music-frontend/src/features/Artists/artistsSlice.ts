@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IAlbum, IArtist } from "../../types";
-import { fetchArtist, fetchArtists } from "./artistsThunk";
+import { createArtist, fetchArtist, fetchArtists } from "./artistsThunk";
 
 interface ArtistsState {
     items: IArtist[];
@@ -42,6 +42,15 @@ export const artistsSlice = createSlice({
                 state.oneArtist = artist;
             })
             .addCase(fetchArtist.rejected, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(createArtist.pending, (state) => {
+                state.itemsFetching = true;
+            })
+            .addCase(createArtist.fulfilled, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(createArtist.rejected, (state) => {
                 state.itemsFetching = false;
             });
     },

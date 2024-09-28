@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import { TrackMutation} from "../types";
 import Track from "../models/Track";
 import auth, { RequestWithUser } from "../middleware/auth";
 import permit from "../middleware/permit";

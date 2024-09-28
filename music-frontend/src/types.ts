@@ -3,6 +3,7 @@ export interface IArtist{
     name: string;
     description?: string;
     image: string | null; 
+    isPublished: boolean;
 }
 
 export interface IAlbum{
@@ -11,6 +12,7 @@ export interface IAlbum{
     artist: string;
     date: Date;
     image: string | null; 
+    isPublished: boolean;
 }
 
 export interface ITrack{
@@ -19,8 +21,14 @@ export interface ITrack{
     duration: string;
     trackNumber: number;
     album: string;
+    isPublished: boolean;
 }
 
+export interface ArtistMutation{
+    name: string;
+    description?: string;
+    image: string | null; 
+}
 export interface IUser{
     _id: string;
     username: string;
