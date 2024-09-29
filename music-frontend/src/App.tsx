@@ -9,6 +9,7 @@ import Register from './features/User/Register'
 import Login from './features/User/Login'
 import TrackHistory from './features/TrackHistory/TrackHistory'
 import ArtistForm from './features/Artists/ArtistForm'
+import NewAlbum from './features/Albums/NewAlbum'
 
 const App = ()=> {
 
@@ -45,6 +46,12 @@ const App = ()=> {
           }/>
           <Route path='/add-new-artist' element={
             <ArtistForm/>  
+          }/>
+           <Route path='/add-new-album' element={
+            <NewAlbum/>  
+          }/>
+           <Route path='/add-new-track' element={
+            <></>  
           }/>
           <Route path="*" element={<h1 className='text-center'>Not found</h1>} />
         </Routes>

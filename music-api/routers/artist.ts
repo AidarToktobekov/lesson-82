@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import {imagesUpload} from "../multer";
 import auth, { RequestWithUser } from "../middleware/auth";
 import permit from "../middleware/permit";
-import { log } from "node:console";
 
 const artistRouter = express.Router();
 

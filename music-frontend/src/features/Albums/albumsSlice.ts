@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IAlbum } from "../../types";
-import { fetchAlbum, fetchAlbums } from "./albumsThunk";
+import { createAlbum, fetchAlbum, fetchAlbums } from "./albumsThunk";
 
 
 interface AlbumsState {
@@ -41,6 +41,15 @@ export const albumsSlice = createSlice({
                 state.oneAlbum = album;
             })
             .addCase(fetchAlbum.rejected, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(createAlbum.pending, (state) => {
+                state.itemsFetching = true;
+            })
+            .addCase(createAlbum.fulfilled, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(createAlbum.rejected, (state) => {
                 state.itemsFetching = false;
             })
     },

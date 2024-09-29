@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { fetchArtists } from "./artistsThunk";
-import { selectArtists, selectLoad } from "./artistsSlice";
+import { selectArtists, selectLoadArtist } from "./artistsSlice";
 import ArtistItem from "./components/ArtistItem";
-import { Link } from "react-router-dom";
 
 const Artists = ()=>{
     
     const dispatch = useAppDispatch();
     const artists = useAppSelector(selectArtists);
-    const isFetching = useAppSelector(selectLoad)
+    const isFetching = useAppSelector(selectLoadArtist)
 
     let content: React.ReactNode = (
         <h5 className="text-center my-5">
@@ -33,14 +32,9 @@ const Artists = ()=>{
     },[dispatch])
     return(
         <>
-        <div className="d-flex align-items-center justify-content-between">
-            <h3 className="text-center my-4">
-                Artists 
-            </h3>
-            <Link to='/add-new-artist' className="btn btn-dark">
-                New Artist
-            </Link>
-        </div>
+        <h3 className="text-center my-4">
+            Artists 
+        </h3>
         <div className="list-group">
             {content}
         </div>

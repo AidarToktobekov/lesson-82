@@ -15,6 +15,12 @@ export interface IAlbum{
     isPublished: boolean;
 }
 
+export interface AlbumMutation{
+    name: string;
+    artist: string;
+    image: string | null;
+}
+
 export interface ITrack{
     _id: string;
     name: string;

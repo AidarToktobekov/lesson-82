@@ -27,7 +27,7 @@ const AppToolbar = ()=>{
 
     let links = (
         <>
-            <NavLink className="navbar-brand text-light ms-auto" to='/register'>Sign up</NavLink>
+            <NavLink className="navbar-brand text-light" to='/register'>Sign up</NavLink>
             <NavLink className="navbar-brand text-light" to='/login'>Sign in</NavLink>
         </>
     );
@@ -36,6 +36,9 @@ const AppToolbar = ()=>{
         links = (
             <>
                 <NavLink className="navbar-brand text-light ms-auto" to='/track-history'>Track-History</NavLink>
+                <NavLink className="navbar-brand text-light" to='/add-new-artist'>New Artist</NavLink>
+                <NavLink className="navbar-brand text-light" to='/add-new-album'>New Album</NavLink>
+                <NavLink className="navbar-brand text-light" to='/add-new-track'>New Track</NavLink>
                 <button className="navbar-brand text-light btn" onClick={handleClick}>{user.username}</button>
                 <Menu open={isOpen} anchorEl={anchorEl} onClose={handleClose} keepMounted>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>

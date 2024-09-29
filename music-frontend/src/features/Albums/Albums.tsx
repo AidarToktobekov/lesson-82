@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
 import { fetchArtist } from "../Artists/artistsThunk";
@@ -40,7 +40,7 @@ const Albums = ()=>{
     return(
         <>
             <h3 className="text-center my-4">
-                {artist?.name}
+                    {artist?.name} 
             </h3>
             <div className="list-group">
                 {content}
