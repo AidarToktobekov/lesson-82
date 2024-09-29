@@ -30,6 +30,12 @@ export interface ITrack{
     isPublished: boolean;
 }
 
+export interface TrackMutation{
+    name: string;
+    duration: string;
+    album: string;
+}
+
 export interface ArtistMutation{
     name: string;
     description?: string;

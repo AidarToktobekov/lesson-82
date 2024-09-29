@@ -10,14 +10,22 @@ const AppToolbar = ()=>{
 
     const dispatch = useAppDispatch();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [createButton, setCreateButton] = useState<null | HTMLElement>(null);
     const isOpen = Boolean(anchorEl);
+    const createButtonOpen = Boolean(createButton);
   
     const handleClose = () => {
       setAnchorEl(null);
     };
+    const handleCreateButtonClose = () => {
+        setCreateButton(null);
+      };
+    const handleCreateButtonClick = (event: React.MouseEvent<HTMLElement>) => {
+        setCreateButton(event.currentTarget);
+    };
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
-      };
+    };
   
     const handleLogout = () => {
       dispatch(logout());
@@ -36,9 +44,18 @@ const AppToolbar = ()=>{
         links = (
             <>
                 <NavLink className="navbar-brand text-light ms-auto" to='/track-history'>Track-History</NavLink>
-                <NavLink className="navbar-brand text-light" to='/add-new-artist'>New Artist</NavLink>
-                <NavLink className="navbar-brand text-light" to='/add-new-album'>New Album</NavLink>
-                <NavLink className="navbar-brand text-light" to='/add-new-track'>New Track</NavLink>
+                <button className="navbar-brand text-light btn" onClick={handleCreateButtonClick}>Create</button>
+                <Menu open={createButtonOpen} anchorEl={createButton} onClose={handleCreateButtonClose} keepMounted>
+                    <MenuItem>
+                    <NavLink className="navbar-brand text-dark d-block px-2 border-1 border-bottom" to='/add-new-artist'>New Artist</NavLink>
+                    </MenuItem>
+                    <MenuItem>
+                    <NavLink className="navbar-brand text-dark d-block px-2 border-1 border-bottom" to='/add-new-album'>New Album</NavLink>
+                    </MenuItem>
+                    <MenuItem>
+                    <NavLink className="navbar-brand text-dark d-block px-2 border-1 border-bottom" to='/add-new-track'>New Track</NavLink>
+                    </MenuItem>
+                </Menu>
                 <button className="navbar-brand text-light btn" onClick={handleClick}>{user.username}</button>
                 <Menu open={isOpen} anchorEl={anchorEl} onClose={handleClose} keepMounted>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>

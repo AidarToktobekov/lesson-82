@@ -25,14 +25,14 @@ albumRouter.get('/:id', async(req, res, next) => {
     }
 })
 
-albumRouter.get('/artist/:idArtist', async(req, res, next) => {
-    try{
-        const albums = await Album.find({artist: req.params.idArtist});
-        return res.send(albums);
-    }catch (error){
-        next(error);
-    }
-})
+// albumRouter.get('/artist/:idArtist', async(req, res, next) => {
+//     try{
+//         const albums = await Album.find({artist: req.params.idArtist});
+//         return res.send(albums);
+//     }catch (error){
+//         next(error);
+//     }
+// })
 
 albumRouter.post('/', auth, imagesUpload.single('image'),  async (req, res, next) => {
     try {

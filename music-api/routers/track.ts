@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import Track from "../models/Track";
 import auth, { RequestWithUser } from "../middleware/auth";
 import permit from "../middleware/permit";
+import { TrackMutation } from "../types";
 
 const tracksRouter = express.Router();
 
@@ -47,12 +48,12 @@ tracksRouter.post('/', auth, async (req, res, next) => {
         }
         const albums = await Track.find({album: req.body.album});
 
-        const tracksMutation = {
+        const tracksMutation: TrackMutation = {
             name: req.body.name,
             duration: req.body.duration,
             album: req.body.album,
             trackNumber: albums.length + 1,
-            user: user?._id,
+            isPublished: false,
         };
 
         const track = new Track(tracksMutation);

@@ -10,6 +10,7 @@ import Login from './features/User/Login'
 import TrackHistory from './features/TrackHistory/TrackHistory'
 import ArtistForm from './features/Artists/ArtistForm'
 import NewAlbum from './features/Albums/NewAlbum'
+import NewTrack from './features/Tracks/NewTrack'
 
 const App = ()=> {
 
@@ -51,7 +52,7 @@ const App = ()=> {
             <NewAlbum/>  
           }/>
            <Route path='/add-new-track' element={
-            <></>  
+            <NewTrack></NewTrack>  
           }/>
           <Route path="*" element={<h1 className='text-center'>Not found</h1>} />
         </Routes>

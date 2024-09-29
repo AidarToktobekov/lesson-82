@@ -6,6 +6,7 @@ import { selectArtist } from "../Artists/artistsSlice";
 import { selectAlbums, selectLoad } from "./albumsSlice";
 import { fetchAlbums } from "./albumsThunk";
 import AlbumsItem from "./components/AlbumsItem";
+import { IAlbum } from "../../types";
 
 
 const Albums = ()=>{
@@ -16,12 +17,23 @@ const Albums = ()=>{
     const artistId = artist?._id
     const isFetching = useAppSelector(selectLoad);
     const albums = useAppSelector(selectAlbums);
+    let albumArtist:IAlbum[] = [];
+    if(albums.length > 0){
+        console.log(albums);
+        albums.map((artist)=>{
+            console.log(id + ' dd ' + artist.artist);
+            
+            if (artist.artist === id) {
+                albumArtist.push(artist);
+            }
+        });
+    }
 
 
     useEffect(()=>{
         dispatch(fetchArtist(id))
         if (artistId) {
-            dispatch(fetchAlbums(artistId))
+            dispatch(fetchAlbums())
         }
     }, [dispatch, artistId]);
 
@@ -32,7 +44,7 @@ const Albums = ()=>{
     );
 
     if (!isFetching) {
-        content = albums.map((album) => (
+        content = albumArtist.map((album) => (
             <AlbumsItem key={album._id} image={album.image} date={album.date} name={album.name} id={album._id} />
         ));
     }

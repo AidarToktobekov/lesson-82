@@ -21,6 +21,7 @@ export interface ITrack {
     album: ObjectId;
     duration: string;
     trackNumber: number;
+    isPublished: boolean;
 }
 
 export type TrackMutation = Omit<ITrack, '_id'>;

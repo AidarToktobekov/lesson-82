@@ -47,7 +47,7 @@ const ArtistForm = ()=>{
         <>
             <form onSubmit={submitFormHandler}>
                 <h3 className="text-center my-4">
-                    Add new Artist
+                    Add New Artist
                 </h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
