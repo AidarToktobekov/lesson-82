@@ -53,6 +53,16 @@ artistRouter.post('/', auth, imagesUpload.single('image'),  async (req, res, nex
     }
 });
 
+artistRouter.patch('/:id/togglePublished', auth, permit('admin'), async(req, res, next)=>{
+    try{
+        const artist = await Artist.findById(req.params.id);
+        await Artist.findByIdAndUpdate(req.params.id, {isPublished: !artist?.isPublished});
+        return res.send(artist);
+    }catch(e){
+        next(e);
+    }
+});
+
 artistRouter.delete('/:id', auth, permit('admin'), async(req, res, next)=>{
     try{
         const artist = await Artist.findByIdAndDelete(req.params.id);

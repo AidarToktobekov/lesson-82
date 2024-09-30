@@ -7,6 +7,7 @@ import { selectAlbums, selectLoad } from "./albumsSlice";
 import { fetchAlbums } from "./albumsThunk";
 import AlbumsItem from "./components/AlbumsItem";
 import { IAlbum } from "../../types";
+import { selectUser } from "../User/userSlice";
 
 
 const Albums = ()=>{
@@ -17,14 +18,13 @@ const Albums = ()=>{
     const artistId = artist?._id
     const isFetching = useAppSelector(selectLoad);
     const albums = useAppSelector(selectAlbums);
+    const user = useAppSelector(selectUser);
+    
     let albumArtist:IAlbum[] = [];
     if(albums.length > 0){
-        console.log(albums);
-        albums.map((artist)=>{
-            console.log(id + ' dd ' + artist.artist);
-            
-            if (artist.artist === id) {
-                albumArtist.push(artist);
+        albums.map((album)=>{
+            if (album.artist === id) {
+                albumArtist.push(album);
             }
         });
     }
@@ -44,9 +44,20 @@ const Albums = ()=>{
     );
 
     if (!isFetching) {
-        content = albumArtist.map((album) => (
-            <AlbumsItem key={album._id} image={album.image} date={album.date} name={album.name} id={album._id} />
-        ));
+        content = albumArtist.map((album) => {
+            if (user?.role === 'admin') {
+                console.log(user?.role);
+                return(
+                    <AlbumsItem key={album._id} image={album.image} date={album.date} name={album.name} id={album._id} isPublished={album.isPublished}/>
+                )
+            }
+            if (album.isPublished) {  
+                              
+                return(
+                    <AlbumsItem key={album._id} image={album.image} date={album.date} name={album.name} id={album._id} isPublished={album.isPublished}/>
+                )
+            }
+        });
     }
 
     return(

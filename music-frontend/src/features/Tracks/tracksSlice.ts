@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ITrack } from "../../types";
-import { createTrack, fetchTracks } from "./trackThunk";
+import { createTrack, deleteTrack, fetchTracks, publishTrack } from "./trackThunk";
 
 
 interface TracksState {
@@ -36,6 +36,24 @@ export const tracksSlice = createSlice({
                 state.itemsFetching = false;
             })
             .addCase(createTrack.rejected, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(deleteTrack.pending, (state) => {
+                state.itemsFetching = true;
+            })
+            .addCase(deleteTrack.fulfilled, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(deleteTrack.rejected, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(publishTrack.pending, (state) => {
+                state.itemsFetching = true;
+            })
+            .addCase(publishTrack.fulfilled, (state) => {
+                state.itemsFetching = false;
+            })
+            .addCase(publishTrack.rejected, (state) => {
                 state.itemsFetching = false;
             })
     },

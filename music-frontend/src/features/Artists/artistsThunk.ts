@@ -24,7 +24,18 @@ export const createArtist = createAsyncThunk<void, ArtistMutation, {state: RootS
         formData.append(key, value);
       }
     });
-    await axiosApi.post<IArtist>(`/artists`, formData, {headers: {'Authorization': `Bearer ${user.token}`}});
+    await axiosApi.post<IArtist>(`/artists`, formData);
   }
 
 });
+
+export const publishArtist = createAsyncThunk<IArtist, string>('artist/publish',  async (id) => {
+  const { data: artist } = await axiosApi.patch<IArtist>(`/artists/${id}/togglePublished`);
+  return artist;
+});
+
+export const deleteArtist = createAsyncThunk<IArtist, string>('artist/delete',  async (id) => {
+  const { data: artist } = await axiosApi.delete<IArtist>(`/artists/${id}`);
+  return artist;
+});
+

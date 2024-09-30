@@ -36,9 +36,18 @@ const Tracks = ()=>{
     );
 
     if (!isFetching) {
-        content = tracks.map((track) => (
-            <TrackItem buttonState={Boolean(!user)} key={track._id} duration={track.duration} trackNumber={track.trackNumber} name={track.name} id={track._id} />
-        ));
+        content = tracks.map((track) => {
+            if (user?.role === 'admin') {
+                return(
+                    <TrackItem buttonState={Boolean(!user)} key={track._id} duration={track.duration} trackNumber={track.trackNumber} name={track.name} id={track._id} isPublished={track.isPublished}/>
+                )
+            }
+            if (track.isPublished) {           
+                return(
+                    <TrackItem buttonState={Boolean(!user)} key={track._id} duration={track.duration} trackNumber={track.trackNumber} name={track.name} id={track._id} isPublished={track.isPublished}/>
+                )
+            }
+        });
     }
 
     return(

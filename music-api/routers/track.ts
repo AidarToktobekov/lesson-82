@@ -69,6 +69,17 @@ tracksRouter.post('/', auth, async (req, res, next) => {
     }
 });
 
+tracksRouter.patch('/:id/togglePublished', auth, permit('admin'), async(req, res, next)=>{
+    try{
+        const track = await Track.findById(req.params.id);
+        await Track.findByIdAndUpdate(req.params.id, {isPublished: !track?.isPublished});
+        return res.send(track);
+    }catch(e){
+        next(e);
+    }
+});
+
+
 tracksRouter.delete('/:id', auth, permit('admin'), async(req, res, next)=>{
     try{
         const track = await Track.findByIdAndDelete(req.params.id);

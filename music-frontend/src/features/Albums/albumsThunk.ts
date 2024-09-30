@@ -27,3 +27,13 @@ export const createAlbum = createAsyncThunk<void, AlbumMutation, {state: RootSta
     await axiosApi.post<IAlbum>(`/albums`, formData, {headers: {'Authorization': `Bearer ${user.token}`}});
   }
 });
+
+export const publishAlbum = createAsyncThunk<IAlbum, string>('albums/publish', async (id) => {
+  const { data: album } = await axiosApi.patch<IAlbum>(`/albums/${id}/togglePublished`);
+  return album;
+});
+
+export const deleteAlbum = createAsyncThunk<IAlbum, string>('albums/delete', async (id) => {
+  const { data: album } = await axiosApi.delete<IAlbum>(`/albums/${id}`);
+  return album;
+});

@@ -35,7 +35,7 @@ const AppToolbar = ()=>{
 
     let links = (
         <>
-            <NavLink className="navbar-brand text-light" to='/register'>Sign up</NavLink>
+            <NavLink className="navbar-brand text-light ms-auto" to='/register'>Sign up</NavLink>
             <NavLink className="navbar-brand text-light" to='/login'>Sign in</NavLink>
         </>
     );

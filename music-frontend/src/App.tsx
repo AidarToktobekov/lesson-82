@@ -13,7 +13,6 @@ import NewAlbum from './features/Albums/NewAlbum'
 import NewTrack from './features/Tracks/NewTrack'
 
 const App = ()=> {
-
   return (
     <>
       <header className='bg-dark'>
