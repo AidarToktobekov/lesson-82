@@ -4,6 +4,7 @@ import { useState } from "react";
 import { LoginMutation } from "../../types";
 import { login } from "./userThunk";
 import {selectLoginError} from './userSlice'
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = ()=>{
 
@@ -35,6 +36,16 @@ const Login = ()=>{
                 <h3 className="text-center my-4">
                     Sign in
                 </h3>
+                <div className="my-3">
+                    <GoogleLogin
+                        onSuccess={(credentialResponse) => {
+                            console.log(credentialResponse);
+                        }}
+                        onError={() => {
+                            console.log('Login Failed');
+                        }}
+                    />
+                </div>
                 <span className="text-danger">
                     {error?.error}
                 </span>
