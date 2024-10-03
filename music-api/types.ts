@@ -31,9 +31,9 @@ export interface UserFields {
     password: string;
     token: string;
     role: string;
-    // googleID: string;
-    // displayName: string;
-    // avatar: string | null; 
+    googleID?: string;
+    displayName: string;
+    avatar: string | null; 
 }
 
 export interface UserMethods {

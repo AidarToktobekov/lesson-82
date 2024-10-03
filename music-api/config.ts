@@ -20,5 +20,9 @@ const config = {
     publicPath: path.join(rootPath, 'public'),
     corsOptions,
     database: 'mongodb://localhost/homeWorks',
+    google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }
 };
 export default config;
