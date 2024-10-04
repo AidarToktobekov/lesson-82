@@ -58,7 +58,7 @@ const AppToolbar = ()=>{
                     </MenuItem>
                 </Menu>
                 <button className="navbar-brand text-light btn d-flex align-items-center gap-2" onClick={handleClick}>
-                    {user.username}
+                    {user.displayName}
                     <span className="d-block rounded-3 d-flex align-items-center justify-content-center bg-light" style={{width: '40px', height: '40px'}}>
                         {user.avatar? (
                             <img src={`${API_URL}/images/${user.avatar}`} alt="#" className="w-100 rounded-3"/>
