@@ -46,6 +46,9 @@ export interface IUser{
     username: string;
     token: string;
     role: string;
+    avatar?: string;
+    displayName: string;
+    googleId?: string;
 }
 
 export interface ValidationError{
@@ -63,6 +66,9 @@ export interface ValidationError{
 export interface RegisterMutation{
     username: string;
     password: string;
+    avatar: string | null;
+    displayName: string;
+    googleId?: string;
 }
 
 export interface LoginMutation {

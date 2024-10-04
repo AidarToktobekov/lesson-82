@@ -2,9 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useState } from "react";
 import { LoginMutation } from "../../types";
-import { login } from "./userThunk";
+import { googleLogin, login } from "./userThunk";
 import {selectLoginError} from './userSlice'
-import { GoogleLogin } from "@react-oauth/google";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
 const Login = ()=>{
 
@@ -30,6 +30,13 @@ const Login = ()=>{
         navigate('/');
     }
 
+    const googleLoginHandler = async (credentialResponse: CredentialResponse) => {
+        if (credentialResponse.credential) {
+            await dispatch(googleLogin(credentialResponse.credential)).unwrap();
+            navigate('/');
+        }
+    };    
+
     return(
         <>
             <form onSubmit={submitFormHandler}>
@@ -38,9 +45,7 @@ const Login = ()=>{
                 </h3>
                 <div className="my-3">
                     <GoogleLogin
-                        onSuccess={(credentialResponse) => {
-                            console.log(credentialResponse);
-                        }}
+                        onSuccess={googleLoginHandler}
                         onError={() => {
                             console.log('Login Failed');
                         }}

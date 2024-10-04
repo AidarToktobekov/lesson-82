@@ -3,18 +3,25 @@ import User from "../models/User";
 import mongoose from 'mongoose';
 import { OAuth2Client } from "google-auth-library";
 import config from "../config";
+import { imagesUpload } from "../multer";
 
 
 const userRouter = express.Router();
 const googleClient = new OAuth2Client(config.google.clientId);
 
-userRouter.post('/', async (req, res, next) => {
+userRouter.post('/', imagesUpload.single('avatar') , async (req, res, next) => {
     try{
-
-        const user = new User({
+        const userMutation = {
             username: req.body.username,
             password: req.body.password,
-        });
+            displayName: req.body.displayName,
+            avatar: req.file ? req.file.filename : null,
+        };
+
+        console.log(userMutation);
+        
+
+        const user = new User(userMutation);
 
         user.generateToken();
         await user.save();
@@ -30,42 +37,43 @@ userRouter.post('/', async (req, res, next) => {
 
 userRouter.post('/google', async (req, res, next) => {
     try {
-      const ticket = await googleClient.verifyIdToken({
-        idToken: req.body.credential,
-        audience: config.google.clientId,
-      });
+        const ticket = await googleClient.verifyIdToken({
+            idToken: req.body.credential,
+            audience: config.google.clientId,
+        });
   
-      const payload = ticket.getPayload();
+        const payload = ticket.getPayload();
   
-      if (!payload) {
-        return res.status(400).send({error: 'Google Login Error!'});
-      }
+        if (!payload) {
+            return res.status(400).send({error: 'Google Login Error!'});
+        }
   
-      const email = payload.email;
-      const id = payload.sub;
-      const displayName = payload.name;
+        const email = payload.email;
+        const id = payload.sub;
+        const displayName = payload.name;
   
-      if (!email) {
+    if (!email) {
         return res.status(400).send({error: 'Not enough user data to continue!'});
-      }
+    }
   
-      let user = await User.findOne({googleID: id});
+    let user = await User.findOne({googleId: id});
   
-      if (!user) {
+    if (!user) {
         const newPassword = crypto.randomUUID();
         user = new User({
-          username: email,
-          password: newPassword,
-          googleId: id,
-          displayName,
+        username: email,
+        password: newPassword,
+        googleId: id,
+        displayName,
+        avatar: payload.picture,
         });
-      }
+    }
   
-      user.generateToken();
-      await user.save();
-      return res.send(user);
+        user.generateToken();
+        await user.save();
+        return res.send(user);
     } catch (error) {
-      return next(error);
+        return next(error);
     }
 });
 
